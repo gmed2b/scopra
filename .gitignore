@@ -1,2 +1,5 @@
 .env
 node_modules
+
+cert.pem
+privkey.pem
