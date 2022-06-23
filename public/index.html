@@ -37,7 +37,25 @@
   </nav>
 
   <div class="container mt-5">
-    <div id="map" style="height: 600px;"></div>
+    <div class="row h-100">
+      <div class="col-6">
+        <div id="map" style="height: 600px;"></div>
+      </div>
+      <div class="col-6">
+        <div class="overflow-auto">
+          <div class="row g-0 gap-3 align-items-center justify-content-between mb-2 pe-3">
+            <div class="col-8">
+              <input class="form-control" type="search" name="searchMonument" id="searchMonument">
+            </div>
+            <div class="col-auto">
+              <button class="btn btn-success">Search</button>
+            </div>
+          </div>
+          <ul class="list-group" id="monumentsWrapper" style="max-height: 80vh;">
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 
 

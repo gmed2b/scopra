@@ -29,6 +29,6 @@ app.post('/weather', (req, res) => {
 
 http.createServer(app).listen(3001);
 https.createServer({
-  key: fs.readFileSync('privkey.pem'),
-  cert: fs.readFileSync('cert.pem')
+  key: fs.readFileSync('.privkey.pem'),
+  cert: fs.readFileSync('.cert.pem')
 }, app).listen(3000);
