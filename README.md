@@ -16,4 +16,4 @@ De plus, nous avons créer une identité graphique avec :
 L'identité graphique du site a été pensé pour rendre le site plus accessible et compréhensible notamment en travaillant son érgonomie et son design.
 
 
-
+Crée par Mehdi et Anthony.
