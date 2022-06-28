@@ -1,5 +1,5 @@
-# Scopra
-http://dataviz.gelk.studio/
+# Scopra (http://dataviz.gelk.studio/)
+
 
 Scopra est un site internet créer à l'occasion du challenge DataViz !
 Le site à pour but de référencer les monuments en Corse via le jeu de données de la plateforme opendata.corsica, afin de rendre le site plus dynamique nous avons créer une interface graphique permettant à l'utilisateur de visualiser les différents lieux avec une carte de la Corse intéractif. La carte utilise la bibliothèque open-source  Leaflet JS (https://leafletjs.com/).
