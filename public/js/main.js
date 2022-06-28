@@ -1,96 +1,94 @@
+const categoryList = document.querySelector('#categoryList'); // dropdown-item
+const searchMonumentElement = document.querySelector('#searchMonument');
 
+let map;
+let allCategories = [];
 
-const allCategory = []
-
-const categoryToIcon = (category) => {
-  const iconTemplate = {
-    iconUrl: '',
-    iconSize: [38, 95],
-    iconAnchor: [22, 94],
-    popupAnchor: [-3, -76],
-  }
-  switch (category) {
-    case "architecture religieuse":
-
-    case "génie civil":
-      return '🏠'
-    case "architecture militaire":
-      return '🎯';
-    case "architecture de l'administration ou de la vie publique":
-      return '📚';
-    case "architecture domestique":
-      return '🏠';
-    case "site archéologique":
-      return '🏛';
-    case "architecture funéraire - commémorative - votive":
-      return '🏛';
-    case "architecture commerciale":
-      return '💰';
-    case "architecture de jardin":
-      return '🌱';
-    case "architecture agricole":
-      return '🌾';
-    case "architecture de culture - recherche - sport - loisir":
-      return '🎮';
-    case "architecture artisanale":
-      return '🏭';
-    case "architecture industrielle":
-      return '🏭';
-    case "architecture hospitalière - d'assistance - de protection sociale":
-      return '🏥';
-    default:
-      return '💬';
-  }
-}
-
-// FUNCTIONS //
 const initMap = () => {
+  // create gray basemap
+  let openStreetMapTiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    minZoom: 8,
+    maxZoom: 16,
+  });
   // initialize the map on the "map" div with a given center and zoom
-  const map = L.map('map').setView([42.18, 9.20], 8);
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(map);
-  return map;
+  return L.map('map', {
+    center: [42.18, 9.20],
+    zoom: 8,
+    layers: [openStreetMapTiles],
+  });
 }
 
-const getUserLocation = () => {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition, err => {
-      console.log(err);
+const addMakerToMap = (latitude, longitude, name, category = '') => {
+  let myIcon = L.Icon.Default;
+  if (category != '' && category != undefined) {
+    category = category.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    category = category.replaceAll(' ', '_').replaceAll('\'', '_').toLowerCase();
+    myIcon = L.icon({
+      iconUrl: `../img/category_icon/${category}.png`,
+      iconSize: [30, 30],
+      iconAnchor: [15, 30],
+      popupAnchor: [0, -40],
+      shadowUrl: '../img/category_icon/marker-shadow.png',
+      shadowSize: [40, 40],
+      shadowAnchor: [20, 40],
     });
-  } else {
-    console.log('Geolocation is not supported by this browser.');
   }
-};
-
-const showPosition = (position) => {
-  const latitude = position.coords.latitude;
-  const longitude = position.coords.longitude;
-  L.marker([latitude, longitude]).addTo(map)
-    .bindPopup('Latitude: ' + latitude + '<br>Longitude: ' + longitude)
-    .openPopup();
-};
-
-const addMakerToMap = (latitude, longitude, name, icon = null) => {
-  const icon = icon == null ? {} : { icon: categoryToIcon(category) };
-  L.marker([latitude, longitude], {icon: icon }).addTo(map)
+  L.marker([latitude, longitude], { icon: myIcon }).addTo(map)
     .bindPopup(name)
-    .openPopup();
 }
 
-const getMonuments = async () => {
-  const monumentsWrapper = document.querySelector('#monumentsWrapper');
-  const apiURL = 'https://www.data.corsica/api/records/1.0/search/?dataset=liste-des-monuments-historiques-en-corse&rows=9999';
+const getMonuments = async (q = '') => {
+  const monumentsList = document.querySelector('#monumentsList');
+  monumentsList.innerHTML = '';
+  const apiURL = 'https://www.data.corsica/api/records/1.0/search/?dataset=liste-des-monuments-historiques-en-corse&rows=9999&q=' + q;
   const response = await fetch(apiURL);
   const data = await response.json();
 
-  const addElement = (name, category) => {
+  const addElement = (name, category, lat, lon) => {
+    category = category.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    category = category.replaceAll(' ', '_').replaceAll('\'', '_').toLowerCase();
+
     const new_element = document.createElement('li');
-    new_element.setAttribute('class', 'list-group-item');
-    new_element.textContent = name + ' - ' + category;
-    monumentsWrapper.appendChild(new_element);
+    new_element.addEventListener("click", (e) => {
+      const elem = e.target;
+      console.log(elem);
+      map.setView([elem.dataset.lat, elem.dataset.lon], 13);
+    });
+    new_element.setAttribute('id', category);
+    new_element.setAttribute('data-lat', lat);
+    new_element.setAttribute('data-lon', lon);
+    new_element.classList.add('list-group-item', 'list-group-item-action', 'align-items-center', 'd-flex', 'flex-wrap', 'gap-3');
+
+    const span = document.createElement('span');
+    span.style.pointerEvents = 'none';
+    span.textContent = name;
+
+    const img = document.createElement('img');
+    img.style.pointerEvents = 'none';
+    img.src = `img/category_icon/${category}.png`;
+    img.style.width = '30px';
+    img.style.height = '30px';
+
+    new_element.appendChild(img);
+    new_element.appendChild(span);
+    monumentsList.appendChild(new_element);
   };
+
+  const addCategory = (category) => {
+    if(!allCategories.includes(category)) {
+      allCategories.push(category);
+
+      const new_category = document.createElement('option');
+      new_category.textContent = category;
+
+      category = category.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      category = category.replaceAll(' ', '_').replaceAll('\'', '_').toLowerCase();
+      new_category.value = category;
+
+      categoryList.appendChild(new_category);
+    }
+  }
 
   // liste les monuments
   data.records.forEach((element) => {
@@ -98,15 +96,33 @@ const getMonuments = async () => {
     const category = element.fields.categorie;
     const latitude = element.fields.point2d[0];
     const longitude = element.fields.point2d[1];
-    addElement(name, category);
-    addMakerToMap(latitude, longitude, name);
+    addElement(name, category ?? 'autre', latitude, longitude);
+    addMakerToMap(latitude, longitude, name, category ?? 'autre');
+    addCategory(category ?? 'autre');
   });
 
-  console.log(allCategory);
 }
 
-// MAIN //
-const map = initMap();
-getUserLocation();
+searchMonumentElement.addEventListener('keyup', (e) => {
+  const searchMonument = e.target.value.toLowerCase();
+  map.remove();
+  map = initMap();
+  getMonuments(searchMonument);
+});
 
-getMonuments();
+categoryList.addEventListener('change', (e) => {
+  console.log(e);
+  const category = e.target.value;
+  const option = categoryList.querySelector(`option[value=${category}]`);
+  searchMonumentElement.value = option.textContent;
+  const event = new Event('keyup');
+  searchMonumentElement.dispatchEvent(event);
+});
+
+
+// MAIN //
+map = initMap();
+// getUserLocation();
+await getMonuments();
+
+

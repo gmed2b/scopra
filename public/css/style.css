@@ -16,3 +16,50 @@ body {
 #gMap {
   height: 100%;
 }
+#map{
+  border-radius: .5rem;
+}
+body{
+  background-image: url("../img/bg.jpg");
+  background-position : center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#mainPage {
+  margin-top: 20px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 2%;
+}
+#content-nav{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav{
+  height : 20vh;
+  display : flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-image: url("../img/nav_bg_black.jpg");
+  background-position : bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.nav #legende{
+  color : white;
+  position : absolute;
+  top : 16vh;
+  font-style: italic;
+}
+#nav-logo-scopra{
+  height : 18vh;
+  width : auto;
+}
+footer{
+  background-image: url("../img/bg.jpg");
+  background-position : center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
