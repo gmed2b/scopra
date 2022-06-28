@@ -11,7 +11,7 @@ Fonctionnalités :
 De plus, nous avons créer une identité graphique avec : 
 1. Des photos
 2. Un logo et baseline
-3. Une bibliothèque de style open-source (Boostrap).
+3. Une bibliothèque de style open-source (Bootstrap).
 
 L'identité graphique du site a été pensé pour rendre le site plus accessible et compréhensible notamment en travaillant son érgonomie et son design.
 
