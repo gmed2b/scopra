@@ -8,7 +8,7 @@ Le site à pour but de référencer les monuments en Corse via le jeu de donnée
 1. Trier les monuments avec des catégories et une barre de recherche.
 2. Géocaliser les monuments sur une carte, en cliquant sur un des lieux dans la liste.
 
-## De plus, nous avons créer une identité graphique avec : 
+De plus, nous avons créer une identité graphique avec : 
 1. Des photos
 2. Un logo et baseline
 3. Une bibliothèque de style open-source (Bootstrap).
