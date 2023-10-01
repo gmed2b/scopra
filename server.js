@@ -1,12 +1,12 @@
-if (process.env.NODE_ENV !== 'production') {
-	require('dotenv').config()
-}
+import path from 'path'
+import compression from 'compression'
+import http from 'http'
+import express from 'express'
+import { fileURLToPath } from 'url';
 
-const path = require('path')
-const fs = require('fs')
-const compression = require('compression')
-const http = require('http')
-const express = require('express')
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express()
 const PORT = 8010
 
@@ -19,9 +19,5 @@ app.use('/img', express.static(path.join(__dirname, 'public/img')))
 app.use(express.static('public'))
 
 const server = http.createServer(app)
-server.listen(PORT, () => console.log(`Listening on ${PORT}`))
 
-// https.createServer({
-//   key: fs.readFileSync('key.pem'),
-//   cert: fs.readFileSync('cert.pem')
-// }, app).listen(3000);
+server.listen(PORT, () => console.log(`Listening on ${PORT}`))

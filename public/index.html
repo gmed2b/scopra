@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,84 +8,77 @@
   <title>SCOPRA</title>
   <link rel="icon" type="image/x-icon" href="img/favico.png">
 
-  <!-- IMPORT STYLING -->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/bootstrap-icons.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="" />
-  <link rel="stylesheet" href="css/style.css">
+  <!-- import leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+    integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+    crossorigin="" />
+  <script defer src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+    crossorigin=""></script>
 
-  <!-- IMPORT SCRIPTS -->
-  <script defer src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-  <script defer src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
-  <script defer src="js/bootstrap.bundle.min.js"></script>
+  <!-- css & js -->
+  <link rel="stylesheet" href="css/style.css">
   <script defer type="module" src="js/main.js"></script>
 
 </head>
 
-  <!-- <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">GELK Studio</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
-            <a class="nav-link" aria-current="page" href="scopra.html">Anto</a>
-          </li>
-        </ul>
-      </div>
-    </div> 
-  </nav>-->
-    <nav class="nav" style="height: 20vh;">
-      <img id="nav-logo-scopra" src="./img/scopra_logo_blanc.png" alt="logo Scopra">
-      <p id="legende">Découvir la culure Corse !</p>
+<body>
 
-    </nav>
+  <nav>
+    <img src="./img/scopra_logo_blanc.png" alt="logo Scopra">
+    <p>Découvir la culure Corse !</p>
+  </nav>
 
-  <div id="mainPage" class="container pt-5 px-4" style="height: 80vh;">
-    <div class="row h-100">
-      <div class="col-7">
-        <div id="map" style="height: 600px;"></div>
-      </div>
-      <div class="col-5">
-        <div class="row justify-content-between">
-          <div class="col-8">
-            <div class="input-group mb-3">
-              <span class="input-group-text" id="basic-addon1">
-                <i class="bi bi-search"></i>
-              </span>
-              <input class="form-control form-group has-search" type="text" name="searchMonument" id="searchMonument" placeholder="Search">
-            </div>
-          </div>
-          <div class="col-4">
-            <select id="categoryList" class="form-select">
-            </select>
-          </div>
-        </div>
-        <div class="overflow-auto">
-          <ul class="list-group" id="monumentsList" style="max-height: 60vh;">
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+  <main>
 
-  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-    <div class="col-md-4 ms-3 d-flex align-items-center">
-      <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-        <img src="img/favico.png" alt="logo" width="30">
-      </a>
-      <span class="mb-3 mb-md-0 text-black">
-        © 2022 
-        <a class="text-black" target="_blank" href="https://github.com/gmed2b">Mehdi Ghoulam</a>
-        & 
-        <a class="text-black" target="_blank" href="https://github.com/antoCreaDev">Anthony Menghi</a>
+    <section id="monuments">
+      <div id="filterMonuments">
+        <input type="text" name="searchMonument" id="searchMonument" placeholder="Search">
+        <select id="categoryList">
+        </select>
+      </div>
+      <ul id="monumentsList">
+      </ul>
+    </section>
+    <br />
+    <br />
+    <section id="map"></section>
+
+
+
+
+
+  </main>
+
+  <footer>
+    <section id="win">
+      <div>
+        <img src="./img/get_logo_site.png" alt="Logo Université de Corse - Fundazione">
+        <img src="./img/jellysmack.png" alt="Logo JellySmack">
+      </div>
+      <p>Gagnant du
+        <a
+          href="https://chaire-territoires.universita.corsica/article.php?id_site=73&id_menu=0&id_rub=970&id_cat=522&id_art=5643&lang=fr">
+          challenge DataViz'
+        </a>
+        (Prix JELLY SMACK) organisé par l'Université de Corse.
+      </p>
+    </section>
+    <section id="contributors">
+      <img src="img/scopra_logo_blanc.png" alt="logo Scopra">
+      <span>
+        © <span id="currentYear">2022</span>
+        |
+        <a target="_blank" href="https://github.com/gmed2b">Mehdi Ghoulam</a>
+        &
+        <a target="_blank" href="https://github.com/antocreadev">Anthony Menghi</a>
       </span>
-    </div>
+    </section>
+
+
   </footer>
 
 
 </body>
+
 </html>

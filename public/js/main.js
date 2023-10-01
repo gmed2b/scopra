@@ -1,9 +1,11 @@
 const categoryList = document.querySelector('#categoryList'); // dropdown-item
 const searchMonumentElement = document.querySelector('#searchMonument');
+const currentYear = document.querySelector('#currentYear');
 
 let map;
 let allCategories = [];
 
+currentYear.textContent = new Date().getFullYear() 
 const initMap = () => {
   // create gray basemap
   let openStreetMapTiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -58,7 +60,6 @@ const getMonuments = async (q = '') => {
     new_element.setAttribute('id', category);
     new_element.setAttribute('data-lat', lat);
     new_element.setAttribute('data-lon', lon);
-    new_element.classList.add('list-group-item', 'list-group-item-action', 'align-items-center', 'd-flex', 'flex-wrap', 'gap-3');
 
     const span = document.createElement('span');
     span.style.pointerEvents = 'none';
