@@ -94,17 +94,50 @@ main #filterMonuments {
   max-width: 100%;
   overflow: hidden;
 }
-
-main #filterMonuments input,
+main #searchBar,
 main #filterMonuments select {
   margin-bottom: 10px;
+}
+main #searchMonument{
+  outline: none;
+  border : none;
+  padding: 10px;
+  margin: 0;
+  width: 90%;
+  background-color: rgb(255, 255, 255, 0);
+
+}
+#searchBar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1vw;
+  background-color: rgb(255, 255, 255);
+}
+#searchBar img{
+  width: 15px;
+  height: auto;
+}
+#logoSearch{
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: centter;
 }
 
 main #map {
   height: 70vh;
   border-radius: 1vw;
-}
+} 
 
+main #categoryList{
+  outline: none;
+  border : none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 1vw;
+  background-color: rgb(255, 255, 255);
+}
 footer {
   background-image: url("../img/bg.jpg");
   background-position: center;
@@ -117,7 +150,7 @@ footer {
   align-items: center;
   padding-left: 20px;
   padding-right: 20px;
-
+  font-size: small;
 }
 footer a {
   color: white;
@@ -146,10 +179,10 @@ footer #contributors{
     flex-direction: row-reverse;
   }
   main #monuments {
-    height: 67.2vh;
+    height: 67.6vh;
   }
   main #monumentsList {
-    height: 60vh;
+    height: 56.5vh;
   }
   main section{
     margin: 10px;
@@ -160,5 +193,8 @@ footer #contributors{
   }
   footer #win img{
     width: 5vw;
+  }
+  footer{
+    font-size: medium;
   }
 }

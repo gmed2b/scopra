@@ -6,6 +6,7 @@ let map;
 let allCategories = [];
 
 currentYear.textContent = new Date().getFullYear() 
+
 const initMap = () => {
   // create gray basemap
   let openStreetMapTiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
